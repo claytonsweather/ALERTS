@@ -1,7 +1,16 @@
 import requests
 import json
 
-ZONE_CODES = ["TXZ213", "TXZ214", "TXZ215"]  # Replace with your zones
+ZONE_CODES = [
+    "TXZ213",  # Houston (Inland Harris)
+    "TXZ214",  # Pearland (Inland Brazoria)
+    "TXZ226",  # Angleton, Clute, Lake Jackson (Coastal Brazoria)
+    "TXZ227",  # West Columbia (Inland Brazoria)
+    "TXZ209",  # New Braunfels (Guadalupe County)
+    "TXZ250",  # Crystal City (Zavala County)
+    "TXZ230",  # Rocksprings (Edwards Plateau)
+    "TXZ198",  # Huntsville (Walker County)
+]
 
 def get_first_alert():
     for zone in ZONE_CODES:
