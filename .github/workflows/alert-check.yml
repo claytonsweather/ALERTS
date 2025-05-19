@@ -1,0 +1,26 @@
+name: NWS Alert Monitor
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"  # every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  check_alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run alert script
+        env:
+          NOTIFY_EVENTS_TOKEN: ${{ secrets.NOTIFY_EVENTS_TOKEN }}
+        run: python send_alerts.py
