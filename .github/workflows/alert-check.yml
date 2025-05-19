@@ -1,0 +1,25 @@
+name: Storm Alert Bot
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # Every 10 minutes
+  workflow_dispatch:
+
+jobs:
+  check-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run alert bot
+        env:
+          NOTIFY_EVENTS_URL: ${{ secrets.NOTIFY_EVENTS_URL }}
+        run: python alert_bot.py
